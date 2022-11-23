@@ -1,24 +1,11 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import { validateLoginForm } from '../utils/validation';
 
 const Login = () => {
   const formik = useFormik({
-    initialValues: {
-      username: '',
-      password: '',
-    },
-    validationSchema: yup.object({
-      username: yup
-        .string()
-        .required('No username provided')
-        .min(4, 'Choose a username 4–20 characters long')
-        .max(20, 'Choose a username 4–20 characters long'),
-      password: yup
-        .string()
-        .required('No password provided')
-        .min(8, 'Password is too short - should be 8 chars minimum.'),
-    }),
+    initialValues: { username: '', password: '' },
+    validationSchema: validateLoginForm(),
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
@@ -35,6 +22,9 @@ const Login = () => {
         onBlur={formik.handleBlur}
         value={formik.values.username}
       />
+      {formik.touched.username && formik.errors.username && (
+        <div>{formik.errors.username}</div>
+      )}
 
       <label htmlFor="password">password:</label>
       <input
