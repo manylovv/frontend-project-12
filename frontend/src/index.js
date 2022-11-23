@@ -1,20 +1,22 @@
+// @ts-nocheck
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Home, Login, NotFound } from './pages';
 import './index.css';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div></div>,
+    element: <Home />,
   },
   {
     path: '/login',
-    element: <div>login</div>,
+    element: <Login />,
   },
   {
     path: '*',
-    element: <div>404</div>,
+    element: <NotFound />,
   },
 ]);
 
