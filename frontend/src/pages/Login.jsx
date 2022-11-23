@@ -11,33 +11,43 @@ const Login = () => {
     },
   });
 
+  const renderError = (field) => {
+    return (
+      formik.touched[field] &&
+      formik.errors[field] && (
+        <div>
+          <span className="error">{formik.errors[field]}</span>
+        </div>
+      )
+    );
+  };
+
   return (
     <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="username">username:</label>
-      <input
-        id="username"
-        name="username"
-        type="text"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.username}
-      />
-      {formik.touched.username && formik.errors.username && (
-        <div>{formik.errors.username}</div>
-      )}
-
-      <label htmlFor="password">password:</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.password}
-      />
-      {formik.touched.password && formik.errors.password && (
-        <div>{formik.errors.password}</div>
-      )}
+      <div>
+        <label htmlFor="username">username:</label>
+        <input
+          id="username"
+          name="username"
+          type="text"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.username}
+        />
+        {renderError('username')}
+      </div>
+      <div>
+        <label htmlFor="password">password:</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.password}
+        />
+        {renderError('password')}
+      </div>
 
       <button type="submit">Submit</button>
     </form>
